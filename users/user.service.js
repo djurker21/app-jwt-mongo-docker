@@ -10,7 +10,8 @@ module.exports = {
     revokeToken,
     getAll,
     getById,
-    getRefreshTokens
+    getRefreshTokens,
+    createUser
 };
 
 async function authenticate({ username, password, ipAddress }) {
@@ -88,6 +89,12 @@ async function getRefreshTokens(userId) {
 
     // return refresh tokens for user
     return await models.RefreshToken.findAll({where: {userId: userId}});
+}
+
+async function createUser(body) {
+    const passwordHash = bcrypt.hashSync(body.password, 10);
+    delete body.password;
+    await models.User.create({passwordHash, ...body});
 }
 
 // helper functions

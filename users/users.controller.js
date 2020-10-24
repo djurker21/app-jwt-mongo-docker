@@ -13,6 +13,7 @@ router.post('/revoke-token', authorize(), revokeTokenSchema, revokeToken);
 router.get('/', authorize(Role.Admin), getAll);
 router.get('/:id', authorize(), getById);
 router.get('/:id/refresh-tokens', authorize(), getRefreshTokens);
+router.post('/', registerUserSchema, registerUser)
 
 module.exports = router;
 
@@ -96,6 +97,20 @@ function getRefreshTokens(req, res, next) {
     userService.getRefreshTokens(req.params.id)
         .then(tokens => tokens ? res.json(tokens) : res.sendStatus(404))
         .catch(next);
+}
+
+function registerUserSchema(req, res, next) {
+    const schema = Joi.object({
+        username: Joi.string().required(),
+        password: Joi.string().required(),
+        email: Joi.string().required()
+    });
+    validateRequest(req, next, schema);
+}
+
+function registerUser(req, res, next) {
+    userService.createUser(req.body);
+    res.json({created: 'success'});
 }
 
 // helper functions
