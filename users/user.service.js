@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require("crypto");
-const { models } = require('mongoose');
+const models = require('../models');
 
 module.exports = {
     authenticate,
@@ -37,10 +37,11 @@ async function authenticate({ username, password, ipAddress }) {
 
 async function refreshToken({ token, ipAddress }) {
     const refreshToken = await getRefreshToken(token);
-    const { user } = refreshToken;
+
+    const userId = refreshToken.userId;
 
     // replace old refresh token with a new one and save
-    const newRefreshToken = generateRefreshToken(user, ipAddress);
+    const newRefreshToken = generateRefreshToken(userId, ipAddress);
     refreshToken.revoked = Date.now();
     refreshToken.revokedByIp = ipAddress;
     refreshToken.replacedByToken = newRefreshToken.token;
@@ -48,7 +49,9 @@ async function refreshToken({ token, ipAddress }) {
     await newRefreshToken.save();
 
     // generate new jwt
-    const jwtToken = generateJwtToken(user);
+    const jwtToken = generateJwtToken(userId);
+
+    const user = await getUser(userId);
 
     // return basic details and tokens
     return { 
@@ -82,8 +85,7 @@ async function getRefreshTokens(userId) {
     await getUser(userId);
 
     // return refresh tokens for user
-    const refreshTokens = await db.RefreshToken.find({ user: userId });
-    return refreshTokens;
+    return await models.RefreshToken.findAll({where: {userId: userId}});
 }
 
 // helper functions
@@ -100,18 +102,18 @@ async function getRefreshToken(token) {
     return refreshToken;
 }
 
-function generateJwtToken(user) {
+function generateJwtToken(userId) {
     // create a jwt token containing the user id that expires in 15 minutes
-    return jwt.sign({ sub: user.id, id: user.id }, config.secret, { expiresIn: '15m' });
+    return jwt.sign({ sub: userId, id: userId }, config.secret, { expiresIn: '15m' });
 }
 
-function generateRefreshToken(user, ipAddress) {
+function generateRefreshToken(userId, ipAddress) {
     // create a refresh token that expires in 7 days
-    return new models.RefreshToken({
-        userId: user.id,
-        token: randomTokenString(),
-        expires: new Date(Date.now() + 7*24*60*60*1000),
-        createdByIp: ipAddress
+    return models.RefreshToken.build({
+      userId: userId,
+      token: randomTokenString(),
+      expires: new Date(Date.now() + 7*24*60*60*1000),
+      createdByIp: ipAddress
     });
 }
 

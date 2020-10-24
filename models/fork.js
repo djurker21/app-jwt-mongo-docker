@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Fork.init({
     title: DataTypes.STRING,
     description: DataTypes.STRING,
-    createdYear: DataTypes.STRING,
-    createdBy: DataTypes.STRING
+    createdYear: DataTypes.INTEGER,
+    createdBy: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Fork',

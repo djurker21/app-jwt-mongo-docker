@@ -12,9 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    static isExpired() {
+      return Date.now() >= this.expires;
+    }
+
+    static isActive() {
+      return !this.revoked && !this.isExpired;
+    }
   };
   RefreshToken.init({
-    userId: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
     token: DataTypes.STRING,
     expires: DataTypes.DATE,
     createdByIp: DataTypes.STRING,
@@ -27,11 +35,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return RefreshToken;
 };
-
-// schema.virtual('isExpired').get(function () {
-//   return Date.now() >= this.expires;
-// });
-
-// schema.virtual('isActive').get(function () {
-//   return !this.revoked && !this.isExpired;
-// });
