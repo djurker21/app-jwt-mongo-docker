@@ -6,7 +6,7 @@ module.exports = {
 };
 
 async function getAll() {
-    const forks = await models.Fork.find();
+    const forks = await models.Fork.findAll();
     return forks.map(x => basicDetails(x));
 }
 
