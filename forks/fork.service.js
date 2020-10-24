@@ -1,4 +1,4 @@
-const db = require('../_helpers/db');
+const models = require('../models');
 
 module.exports = {
     getAll,
@@ -6,7 +6,7 @@ module.exports = {
 };
 
 async function getAll() {
-    const forks = await db.Fork.find();
+    const forks = await models.Fork.find();
     return forks.map(x => basicDetails(x));
 }
 
@@ -18,8 +18,7 @@ async function getById(id) {
 // helper functions
 
 async function getFork(id) {
-    if (!db.isValidId(id)) throw 'Fork not found';
-    const fork = await db.Fork.findById(id);
+    const fork = models.Fork.findOne({where: {id: id}});
     if (!fork) throw 'Fork not found';
     return fork;
 }
