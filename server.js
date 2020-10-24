@@ -4,10 +4,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const errorHandler = require('./_middleware/error-handler');
+const errorHandler = require('_middleware/error-handler');
 
 // create test user in db on startup if required
-const createTestUser = require('./_helpers/create-test-user');
+const createTestUser = require('_helpers/create-test-user');
 createTestUser();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,10 +19,9 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 
 // api routes
 app.use('/users', require('./users/users.controller'));
-app.use('/forks', require('./forks/forks.controller'));
 
 // swagger docs route
-app.use('/api-docs', require('./_helpers/swagger'));
+app.use('/api-docs', require('_helpers/swagger'));
 
 // global error handler
 app.use(errorHandler);

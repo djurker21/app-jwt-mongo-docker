@@ -1,8 +1,8 @@
-﻿const jwt = require('jsonwebtoken');
+﻿const config = require('config.json');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require("crypto");
-const db = require('../_helpers/db');
-const config = require('../config.json');
+const db = require('_helpers/db');
 
 module.exports = {
     authenticate,
@@ -121,6 +121,6 @@ function randomTokenString() {
 }
 
 function basicDetails(user) {
-    const { id, email, username, role } = user;
-    return { id, email, username, role };
+    const { id, firstName, lastName, username, role } = user;
+    return { id, firstName, lastName, username, role };
 }
