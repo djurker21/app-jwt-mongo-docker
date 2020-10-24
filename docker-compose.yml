@@ -1,15 +1,18 @@
 version: '3.4'
 
 services:
-  mongo:
-    image: mongo
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: example
     ports:
-      - 27017:27017
-  
-  mongo-express:
-    image: mongo-express
+      - 3306:3306
+
+  adminer:
+    image: adminer
     ports:
-      - 8081:8081
+      - 8080:8080
 
   # nodemongojwtrefreshtokensapi:
   #   image: nodemongojwtrefreshtokensapi

@@ -1,7 +1,7 @@
 {
     "name": "node-mongo-jwt-refresh-tokens-api",
     "version": "1.0.0",
-    "description": "Node.js + MongoDB API - JWT Authentication with Refresh Tokens",
+    "description": "Node.js + MySQL API - JWT Authentication with Refresh Tokens",
     "license": "MIT",
     "scripts": {
         "start": "node ./server.js",
@@ -16,9 +16,10 @@
         "express": "^4.17.1",
         "express-jwt": "^6.0.0",
         "jsonwebtoken": "^8.5.1",
-        "mongodb": "^3.5.7",
-        "mongoose": "^5.9.21",
+        "mysql2": "^2.2.5",
         "rootpath": "^0.1.2",
+        "sequelize": "^6.3.5",
+        "sequelize-cli": "^6.2.0",
         "swagger-ui-express": "^4.1.4",
         "yamljs": "^0.3.0"
     },

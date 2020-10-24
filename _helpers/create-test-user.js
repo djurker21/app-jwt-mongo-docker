@@ -1,13 +1,14 @@
 const bcrypt = require('bcryptjs');
-const db = require('./db');
+const models = require('../models');
 const Role = require('./role');
 
 module.exports = createTestUser;
 
 async function createTestUser() {
     // create test user if the db is empty
-    if ((await db.User.countDocuments({})) === 0) {
-        const user = new db.User({
+    const usersCount = await models.User.count();
+    if (usersCount === 0) {
+        const user = models.User.build({
             firstName: 'Test',
             lastName: 'User',
             username: 'test',
