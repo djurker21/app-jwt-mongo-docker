@@ -16,20 +16,22 @@ module.exports = {
 async function authenticate({ username, password, ipAddress }) {
     const user = await models.User.findOne({where: { username: username }});
 
-    if (!user || !bcrypt.compareSync(password, user.passwordHash)) {
+    const userObj = user.dataValues;
+
+    if (!user || !bcrypt.compareSync(password, userObj.passwordHash)) {
         throw 'Username or password is incorrect';
     }
 
     // authentication successful so generate jwt and refresh tokens
-    const jwtToken = generateJwtToken(user);
-    const refreshToken = generateRefreshToken(user, ipAddress);
+    const jwtToken = generateJwtToken(userObj.id);
+    const refreshToken = generateRefreshToken(userObj.id, ipAddress);
 
     // save refresh token
     await refreshToken.save();
 
     // return basic details and tokens
     return { 
-        ...basicDetails(user),
+        ...basicDetails(userObj),
         jwtToken,
         refreshToken: refreshToken.token
     };
@@ -98,6 +100,7 @@ async function getUser(id) {
 
 async function getRefreshToken(token) {
     const refreshToken = await models.RefreshToken.findOne({where: {token: token}});
+
     if (!refreshToken || !refreshToken.isActive) throw 'Invalid token';
     return refreshToken;
 }

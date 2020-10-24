@@ -12,14 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-
-    static isExpired() {
-      return Date.now() >= this.expires;
-    }
-
-    static isActive() {
-      return !this.revoked && !this.isExpired;
-    }
+  };
+  RefreshToken.prototype.isActive = function () {
+    return !this.revoked && !(Date.now() >= this.expires);
   };
   RefreshToken.init({
     userId: DataTypes.INTEGER,
