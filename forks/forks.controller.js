@@ -12,7 +12,7 @@ router.get('/:id', authorize(), getById);
 module.exports = router;
 
 function getAll(req, res, next) {
-  forkService.getAll()
+  forkService.getAll(req.query)
         .then(forks => res.json(forks))
         .catch(next);
 }
