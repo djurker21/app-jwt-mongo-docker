@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+
+  # nodemongojwtrefreshtokensapi:
+  #   image: nodemongojwtrefreshtokensapi
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 4000:80
