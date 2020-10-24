@@ -45,12 +45,9 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  firstName:
+                  email:
                     type: string
-                    example: "yurii"
-                  lastName:
-                    type: string
-                    example: "Vydai"
+                    example: "yurii@yur.ii"
                   username:
                     type: string
                     example: "yurii"
@@ -99,12 +96,9 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  firstName:
+                  email:
                     type: string
-                    example: "yurii"
-                  lastName:
-                    type: string
-                    example: "Vydai"
+                    example: "yurii@yur.ii"
                   username:
                     type: string
                     example: "yurii"
@@ -190,12 +184,9 @@ paths:
                     id:
                       type: string
                       example: "5eb12e197e06a76ccdefc121"
-                    firstName:
+                    email:
                       type: string
-                      example: "yurii"
-                    lastName:
-                      type: string
-                      example: "Vydai"
+                      example: "yurii@yur.ii"
                     username:
                       type: string
                       example: "yurii"
@@ -230,12 +221,9 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  firstName:
+                  email:
                     type: string
-                    example: "yurii"
-                  lastName:
-                    type: string
-                    example: "Vydai"
+                    example: "yurii@yur.ii"
                   username:
                     type: string
                     example: "yurii"
