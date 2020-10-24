@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require("crypto");
-const db = require('_helpers/db');
+const { models } = require('mongoose');
 
 module.exports = {
     authenticate,
@@ -14,7 +14,7 @@ module.exports = {
 };
 
 async function authenticate({ username, password, ipAddress }) {
-    const user = await db.User.findOne({ username });
+    const user = await models.User.findOne({where: { username: username }});
 
     if (!user || !bcrypt.compareSync(password, user.passwordHash)) {
         throw 'Username or password is incorrect';
@@ -68,7 +68,7 @@ async function revokeToken({ token, ipAddress }) {
 }
 
 async function getAll() {
-    const users = await db.User.find();
+    const users = await models.User.findAll();
     return users.map(x => basicDetails(x));
 }
 
@@ -89,14 +89,13 @@ async function getRefreshTokens(userId) {
 // helper functions
 
 async function getUser(id) {
-    if (!db.isValidId(id)) throw 'User not found';
-    const user = await db.User.findById(id);
+    const user = models.User.findOne({where: {id: id}});
     if (!user) throw 'User not found';
     return user;
 }
 
 async function getRefreshToken(token) {
-    const refreshToken = await db.RefreshToken.findOne({ token }).populate('user');
+    const refreshToken = await models.RefreshToken.findOne({where: {token: token}});
     if (!refreshToken || !refreshToken.isActive) throw 'Invalid token';
     return refreshToken;
 }
@@ -108,8 +107,8 @@ function generateJwtToken(user) {
 
 function generateRefreshToken(user, ipAddress) {
     // create a refresh token that expires in 7 days
-    return new db.RefreshToken({
-        user: user.id,
+    return new models.RefreshToken({
+        userId: user.id,
         token: randomTokenString(),
         expires: new Date(Date.now() + 7*24*60*60*1000),
         createdByIp: ipAddress
