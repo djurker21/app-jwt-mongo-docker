@@ -21,7 +21,7 @@ paths:
               properties:
                 username:
                   type: string
-                  example: "yurii"
+                  example: "Yurii"
                 password:
                   type: string
                   example: "pass123"
@@ -45,12 +45,18 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
+                  firstName:
+                    type: string
+                    example: "Yurii"
+                  lastName:
+                    type: string
+                    example: "Vydai"
+                  username:
+                    type: string
+                    example: "Yurii"
                   email:
                     type: string
                     example: "yurii@yur.ii"
-                  username:
-                    type: string
-                    example: "yurii"
                   role:
                     type: string
                     example: "Admin"
@@ -96,12 +102,18 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
+                  firstName:
+                    type: string
+                    example: "Yurii"
+                  lastName:
+                    type: string
+                    example: "Vydai"
+                  username:
+                    type: string
+                    example: "Yurii"
                   email:
                     type: string
                     example: "yurii@yur.ii"
-                  username:
-                    type: string
-                    example: "yurii"
                   role:
                     type: string
                     example: "Admin"
@@ -184,12 +196,18 @@ paths:
                     id:
                       type: string
                       example: "5eb12e197e06a76ccdefc121"
+                    firstName:
+                      type: string
+                      example: "Yurii"
+                    lastName:
+                      type: string
+                      example: "Vydai"
+                    username:
+                      type: string
+                      example: "Yurii"
                     email:
                       type: string
                       example: "yurii@yur.ii"
-                    username:
-                      type: string
-                      example: "yurii"
                     role:
                       type: string
                       example: "Admin"
@@ -221,12 +239,18 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
+                  firstName:
+                    type: string
+                    example: "Yurii"
+                  lastName:
+                    type: string
+                    example: "Vydai"
+                  username:
+                    type: string
+                    example: "Yurii"
                   email:
                     type: string
                     example: "yurii@yur.ii"
-                  username:
-                    type: string
-                    example: "yurii"
                   role:
                     type: string
                     example: "Admin"

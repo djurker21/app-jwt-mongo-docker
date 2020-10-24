@@ -11,6 +11,7 @@ async function createTestUser() {
             firstName: 'Test',
             lastName: 'User',
             username: 'test',
+            email: "test@te.st",
             passwordHash: bcrypt.hashSync('test', 10),
             role: Role.Admin
         });
