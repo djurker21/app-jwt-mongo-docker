@@ -5,5 +5,12 @@
     "database": "app-jwt-mysql-docker",
     "host": "127.0.0.1",
     "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "example",
+    "database": "app-jwt-mysql-docker",
+    "host": "db",
+    "dialect": "mysql"
   }
 }

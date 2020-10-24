@@ -14,12 +14,12 @@ services:
     ports:
       - 8080:8080
 
-  # nodemongojwtrefreshtokensapi:
-  #   image: nodemongojwtrefreshtokensapi
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   environment:
-  #     NODE_ENV: production
-  #   ports:
-  #     - 4000:80
+  nodemongojwtrefreshtokensapi:
+    image: nodemongojwtrefreshtokensapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4000:80
