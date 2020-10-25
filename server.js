@@ -6,9 +6,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const errorHandler = require('./_middleware/error-handler');
 
-const runMigration = require('./_helpers/run-migration');
-runMigration();
-
 // create test user in db on startup if required
 const createTestUser = require('./_helpers/create-test-user');
 createTestUser();
