@@ -6,10 +6,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const errorHandler = require('./_middleware/error-handler');
 
-// create test user in db on startup if required
-const createTestUser = require('./_helpers/create-test-user');
-createTestUser();
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
