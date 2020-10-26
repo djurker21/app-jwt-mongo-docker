@@ -36,6 +36,5 @@ function createForkSchema(req, res, next) {
 
 function createFork(req, res, next) {
   forkService.createFork(req.body);
-  console.log(req.body);
   res.json({created: 'success'});
 }
