@@ -23,8 +23,6 @@ async function getById(id) {
 
 async function createFork(body) {
     const result = await models.Fork.create(body);
-
-    //notify...
     await notifyUser(result.CategoryId, result.userId, result.id);
 }
 
