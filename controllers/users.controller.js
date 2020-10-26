@@ -4,7 +4,7 @@ const Joi = require('@hapi/joi');
 const validateRequest = require('../_middleware/validate-request');
 const authorize = require('../_middleware/authorize')
 const Role = require('../_helpers/role');
-const userService = require('./user.service');
+const userService = require('../services/user.service');
 
 // routes
 router.post('/authenticate', authenticateSchema, authenticate);

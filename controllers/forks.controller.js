@@ -3,7 +3,7 @@ const router = express.Router();
 const Joi = require('@hapi/joi');
 const authorize = require('../_middleware/authorize')
 const Role = require('../_helpers/role');
-const forkService = require('./fork.service');
+const forkService = require('../services/fork.service');
 
 // routes
 router.get('/', authorize(), getAll);
