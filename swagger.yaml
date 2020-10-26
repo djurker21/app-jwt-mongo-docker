@@ -315,6 +315,54 @@ paths:
         "401":
           $ref: "#/components/responses/UnauthorizedError"
 
+  /users/register:
+    post:
+      summary: Register new user.
+      description: Register new user.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "Yurii"
+                password:
+                  type: string
+                  example: "pass123"
+                email:
+                  type: string
+                  example: "Yurii@yur.ii"
+                firstName:
+                  type: string
+                  example: "Yurii"
+                lastName:
+                  type: string
+                  example: "Vydai"
+              required:
+                - username
+                - password
+                - email
+      responses:
+        "200":
+          description: message success
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: string
+                    example: "success"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
 components:
   securitySchemes:
     bearerAuth:
