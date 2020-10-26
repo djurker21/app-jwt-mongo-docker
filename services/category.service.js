@@ -5,7 +5,8 @@ const {getPagination, getPagingData} = require('../_helpers/paginator');
 module.exports = {
     getAll,
     createCategory,
-    getByIdIncludeForks
+    getByIdIncludeForks,
+    subscribeUser
 };
 
 async function getAll(query) {
@@ -21,4 +22,8 @@ async function createCategory(body) {
 
 async function getByIdIncludeForks(id) {
     await models.Category.getByIdIncludeForks(id);
+}
+
+async function subscribeUser(userId, categoryId) {
+    await models.UserSubsribeCategory.create({userId, categoryId});
 }

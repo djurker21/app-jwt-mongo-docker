@@ -22,7 +22,10 @@ async function getById(id) {
 }
 
 async function createFork(body) {
-    await models.Fork.create(body);
+    const result = await models.Fork.create(body);
+
+    //notify...
+    await notifyUser(result.CategoryId, result.userId, result.id);
 }
 
 async function getByUserId(userId, query) {
@@ -42,7 +45,17 @@ async function getByCategoryId(CategoryId, query) {
 // helper functions
 
 async function getFork(id) {
-    const fork = models.Fork.findOne({where: {id: id}});
+    const fork = await models.Fork.findOne({where: {id: id}});
     if (!fork) throw 'Fork not found';
     return fork;
+}
+
+async function notifyUser(categoryId, userId, forkId) {
+    const usersSubscribed = await models.UserSubsribeCategory.findAll({where: {categoryId}});
+    if (usersSubscribed) {
+        for (const userSubscribed of usersSubscribed) {
+            const userToNotify = userSubscribed.userId;
+            await models.Notification.create({categoryId, userId, forkId, userToNotify});
+        }
+    }
 }

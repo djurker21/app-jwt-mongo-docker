@@ -1,18 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('UserSubsribeCategories', {
+    await queryInterface.createTable('Notifications', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER
-      },
       categoryId: {
         type: Sequelize.INTEGER
+      },
+      userId: {
+        type: DataTypes.INTEGER
+      }, 
+      forkId: {
+        type: DataTypes.INTEGER
+      }, 
+      userToNotify: {
+        type: DataTypes.INTEGER
+      },
+      notified: {
+        type: DataTypes.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +34,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('UserSubsribeCategories');
+    await queryInterface.dropTable('Notifications');
   }
 };

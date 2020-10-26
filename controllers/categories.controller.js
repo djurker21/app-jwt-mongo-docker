@@ -8,6 +8,7 @@ const categoryService = require('../services/category.service');
 // routes
 router.get('/', authorize(), getAll);
 router.post('/', authorize(), createCategorySchema, createCategory);
+router.get('/:categoryId/subscribe-user/:userId', authorize(), subscribeUser);
 
 module.exports = router;
 
@@ -28,4 +29,11 @@ function createCategorySchema(req, res, next) {
 function createCategory(req, res, next) {
   categoryService.createCategory(req.body);
   res.json({created: 'success'});
+}
+
+function subscribeUser(req, res, next) {
+    const userId = req.params.userId;
+    const categoryId = req.params.categoryId;
+    categoryService.subscribeUser(userId, categoryId);
+    res.json({created: 'success'});
 }
