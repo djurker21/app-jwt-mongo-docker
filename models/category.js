@@ -12,12 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
         Category.hasMany(models.Fork, {as: 'forks'});
     }
-
-    static getByIdIncludeForks(id) {
-        return this.findAll({where: {id: id}, include: [{
-            model: Fork, as: 'forks'
-        }]})
-    }
   };
   Category.init({
     title: DataTypes.STRING,

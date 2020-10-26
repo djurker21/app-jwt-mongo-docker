@@ -5,7 +5,9 @@ const {getPagination, getPagingData} = require('../_helpers/paginator');
 module.exports = {
     getAll,
     getById,
-    createFork
+    createFork,
+    getByUserId,
+    getByCategoryId
 };
 
 async function getAll(query) {
@@ -21,6 +23,20 @@ async function getById(id) {
 
 async function createFork(body) {
     await models.Fork.create(body);
+}
+
+async function getByUserId(userId, query) {
+    const {page, size} = query;
+    const {limit, offset} = getPagination(page, size);
+    const data = await models.Fork.getByUserId(userId, limit, offset);
+    return getPagingData(data, page, size);
+}
+
+async function getByCategoryId(CategoryId, query) {
+    const {page, size} = query;
+    const {limit, offset} = getPagination(page, size);
+    const data = await models.Fork.getByCategoryId(CategoryId, limit, offset);
+    return getPagingData(data, page, size);
 }
 
 // helper functions

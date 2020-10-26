@@ -9,6 +9,8 @@ const forkService = require('../services/fork.service');
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
 router.post('/', authorize(), createForkSchema, createFork);
+router.get('/by-user/:userId', authorize(), getByUserId);
+router.get('/by-category/:CategoryId', authorize(), getByCategoryId);
 
 module.exports = router;
 
@@ -38,4 +40,16 @@ function createForkSchema(req, res, next) {
 function createFork(req, res, next) {
   forkService.createFork(req.body);
   res.json({created: 'success'});
+}
+
+function getByUserId(req, res, next) {
+    forkService.getByUserId(req.params.userId, req.query)
+        .then(forks => forks ? res.json(forks) : res.sendStatus(404))
+        .catch(next);
+}
+
+function getByCategoryId(req, res, next) {
+    forkService.getByCategoryId(req.params.CategoryId, req.query)
+        .then(forks => forks ? res.json(forks) : res.sendStatus(404))
+        .catch(next);
 }

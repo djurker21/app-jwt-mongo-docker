@@ -12,6 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    static getByUserId(userId, limit, offset) {
+        return this.findAndCountAll({where: {userId: userId}, limit, offset});
+    }
+
+    static getByCategoryId(CategoryId, limit, offset) {
+        return this.findAndCountAll({where: {CategoryId: CategoryId}, limit, offset});
+    }
   };
   Fork.init({
     title: DataTypes.STRING,

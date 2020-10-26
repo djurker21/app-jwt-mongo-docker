@@ -7,7 +7,6 @@ const categoryService = require('../services/category.service');
 
 // routes
 router.get('/', authorize(), getAll);
-router.get('/:id/with-forks', authorize(), getByIdIncludeForks);
 router.post('/', authorize(), createCategorySchema, createCategory);
 
 module.exports = router;
@@ -15,12 +14,6 @@ module.exports = router;
 function getAll(req, res, next) {
   categoryService.getAll(req.query)
         .then(categories => res.json(categories))
-        .catch(next);
-}
-
-function getByIdIncludeForks(req, res, next) {
-    categoryService.getByIdIncludeForks(req.params.id)
-        .then(category => category ? res.json(category) : res.sendStatus(404))
         .catch(next);
 }
 
