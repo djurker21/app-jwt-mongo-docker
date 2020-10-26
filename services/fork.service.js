@@ -1,5 +1,7 @@
 const models = require('../models');
 
+const {getPagination, getPagingData} = require('../_helpers/paginator');
+
 module.exports = {
     getAll,
     getById,
@@ -28,17 +30,3 @@ async function getFork(id) {
     if (!fork) throw 'Fork not found';
     return fork;
 }
-
-function getPagination(page, size) {
-  const limit = size ? +size : 3;
-  const offset = page ? page * limit : 0;
-  return { limit, offset };
-}
-
-const getPagingData = (data, page, limit) => {
-  const { count, rows } = data;
-  const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(count / limit);
-
-  return { totalItems: count, items: rows, totalPages, currentPage };
-};
