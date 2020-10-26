@@ -2,7 +2,8 @@ const models = require('../models');
 
 module.exports = {
     getAll,
-    getById
+    getById,
+    createFork
 };
 
 async function getAll(query) {
@@ -13,8 +14,11 @@ async function getAll(query) {
 }
 
 async function getById(id) {
-    const fork = await getFork(id);
-    return basicDetails(fork);
+    return await getFork(id);
+}
+
+async function createFork(body) {
+    await models.Fork.create(body);
 }
 
 // helper functions
@@ -23,11 +27,6 @@ async function getFork(id) {
     const fork = models.Fork.findOne({where: {id: id}});
     if (!fork) throw 'Fork not found';
     return fork;
-}
-
-function basicDetails(fork) {
-    const { title, description, producedYear, createdBy } = fork;
-    return { title, description, producedYear, createdBy };
 }
 
 function getPagination(page, size) {
