@@ -10,11 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+        Category.hasMany(models.Fork, {as: 'forks'});
+    }
+
+    static getByIdIncludeForks(id) {
+        return this.findAll({where: {id: id}, include: [{
+            model: Fork, as: 'forks'
+        }]})
     }
   };
   Category.init({
-    name: DataTypes.STRING,
+    title: DataTypes.STRING,
     description: DataTypes.STRING
   }, {
     sequelize,

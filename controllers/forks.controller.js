@@ -29,7 +29,8 @@ function createForkSchema(req, res, next) {
       title: Joi.string().required(),
       description: Joi.string().required(),
       createdYear: Joi.number().integer(),
-      createdBy: Joi.number().integer()
+      createdBy: Joi.number().integer(),
+      categoryId: Joi.number().integer()
   });
   validateRequest(req, next, schema);
 }
