@@ -1,4 +1,3 @@
-const { function } = require('@hapi/joi');
 const models = require('../models');
 
 const {getPagination, getPagingData} = require('../_helpers/paginator');
